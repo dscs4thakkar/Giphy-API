@@ -32,8 +32,9 @@ function addButton(show){
 }
 
 function populateGIFContainer(show){
+	var animal= $(this).text()
 	$.ajax({
-		url: "https://api.giphy.com/v1/gifs/search?q=' + animal + '&api_key=No6am1UpZmhO4GCEncGIfkDJNUE7aino&limit=10",
+		url: "https://api.giphy.com/v1/gifs/search?q=" + show + "&api_key=No6am1UpZmhO4GCEncGIfkDJNUE7aino&limit=10",
 		method: "GET"
 	}).then(function(response){
 		response.data.forEach(function(element){
