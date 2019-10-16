@@ -13,28 +13,27 @@ function renderButtons(){
 		newButton.text(topics[i]);
 		$("#button-container").append(newButton);
 	}
-	$(".animal-button").unbind("click");
 
 	$(".animal-button").on("click", function(){
-		$(".gif-image").unbind("click");
+	
 		$("#gif-container").empty();
 		populateGIFContainer($(this).text());
 	});
 
 }
 
-function addButton(show){
-	if(topics.indexOf(show) === -1) {
-		topics.push(show);
+function addButton(animal){
+	if(topics.indexOf(animal) === -1) {
+		topics.push(animal);
 		$("#button-container").empty();
 		renderButtons();
 	}
 }
 
-function populateGIFContainer(show){
-	var animal= $(this).text()
+function populateGIFContainer(animal){
+
 	$.ajax({
-		url: "https://api.giphy.com/v1/gifs/search?q=" + show + "&api_key=No6am1UpZmhO4GCEncGIfkDJNUE7aino&limit=10",
+		url: "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=No6am1UpZmhO4GCEncGIfkDJNUE7aino&limit=10",
 		method: "GET"
 	}).then(function(response){
 		response.data.forEach(function(element){
@@ -50,7 +49,6 @@ function populateGIFContainer(show){
 			$("#gif-container").append(newDiv);
 		});
 		
-		$(".gif-image").unbind("click");
 		$(".gif-image").on("click", function(){
 			if($(this).attr("state") === "still") {
 				$(this).attr("state", "animated");
